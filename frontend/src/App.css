@@ -93,3 +93,7 @@ select {
   height: 100vh;
   background-color: $main-color;
 }
+
+.big-shadow-inner {
+  box-shadow: inset 0px -4px 20px -6px black;
+}

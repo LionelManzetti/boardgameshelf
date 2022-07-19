@@ -60,7 +60,7 @@ function Login() {
           >
             Mot de passe
             <input
-              className="border rounded- text-sm py-1 px-2 w-full"
+              className="border rounded-md text-sm py-1 px-2 w-full"
               type="password"
               name="password"
               placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
@@ -69,10 +69,11 @@ function Login() {
             />
           </label>
           <input
-            className="my-6 w-1/2 self-center bg-cyan-500 hover:bg-green-500 cursor-pointer text-white font-semibold py-1 rounded shadow-md"
+            className="my-6 w-1/2 self-center bg-cyan-800 hover:bg-green-800 cursor-pointer text-white font-semibold py-1 rounded shadow-md"
             type="button"
             value="Connexion"
             onClick={onSubmit}
+            // onClick={() => navigate("/shelf")}
           />
         </form>
       </div>
