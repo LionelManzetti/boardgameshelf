@@ -69,7 +69,7 @@ function Login() {
             />
           </label>
           <input
-            className="my-6 w-1/2 self-center bg-lime-500 hover:bg-blue-400 cursor-pointer text-white font-semibold py-1 rounded shadow-md"
+            className="my-6 w-1/2 self-center bg-cyan-500 hover:bg-green-500 cursor-pointer text-white font-semibold py-1 rounded shadow-md"
             type="button"
             value="Connexion"
             onClick={onSubmit}
