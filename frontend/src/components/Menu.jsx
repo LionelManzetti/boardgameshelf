@@ -27,7 +27,7 @@ function Menu() {
         <img
           src={shelf}
           alt="shelf"
-          className="w-10 h-10 max-w-10 hover:w-12"
+          className="w-10 h-10 max-w-10 hover:w-12 rounded-xl"
         />
       </NavLink>
 
@@ -44,7 +44,11 @@ function Menu() {
               }
         }
       >
-        <img src={profile} alt="profile" className="w-10 h-10 hover:w-12" />
+        <img
+          src={profile}
+          alt="profile"
+          className="w-10 h-10 hover:w-12 rounded-xl"
+        />
       </NavLink>
 
       <NavLink
@@ -60,7 +64,11 @@ function Menu() {
               }
         }
       >
-        <img src={gamenight} alt="gamenight" className="w-10 h-10 hover:w-12" />
+        <img
+          src={gamenight}
+          alt="gamenight"
+          className="w-10 h-10 hover:w-12 rounded-xl"
+        />
       </NavLink>
 
       <NavLink

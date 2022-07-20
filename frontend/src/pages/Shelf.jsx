@@ -21,33 +21,33 @@ function Shelf() {
   const [collection, setCollection] = useState();
   const [displayedGames, setDisplayedGames] = useState();
 
-  // const selectDisplay = (filter) => {
-  //   if (filter === "owned") {
-  //     setDisplayedGames(collection.filter((bg) => bg.has === 1));
-  //   }
-  // };
-
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/usershelf/${user.id}`)
       .then((result) => {
-        setCollection(result.data);
+        setCollection(result.data.filter((bg) => bg.has === 1));
         setDisplayedGames(result.data.filter((bg) => bg.has === 1));
       })
       .catch((err) => console.warn(err));
-    console.warn(collection);
   }, [user]);
+
+  const handleSortByFav = () => {
+    if (collection === displayedGames) {
+      setDisplayedGames(displayedGames.filter((bg) => bg.favorite === 1));
+    } else {
+      setDisplayedGames(collection);
+    }
+  };
 
   return (
     <>
-      <h1>My Board Game Shelf</h1>
       <div className="bg-yellow-800 w-4/5 h-5/6 shadow-lg">
         {modal && (
           <div className="absolute inset-0 z-20 bg-gray-100 flex justify-center items-center float-left mx-2 my-20 border-2 border-gray-400">
             <AddGame
               collection={collection}
               setModal={setModal}
-              displayedGames={displayedGames}
+              displayedGames={collection}
             />
           </div>
         )}
@@ -63,9 +63,9 @@ function Shelf() {
             <button
               type="button"
               className="mt-2 border-4 rounded-full border-yellow-500/30 h-14 w-14 text-yellow-500/30 text-xl font-semibold bg-yellow-600/30 hover:bg-yellow-400/30"
-              onClick={() => setModal(!modal)}
+              onClick={() => handleSortByFav()}
             >
-              Sort
+              Fav
             </button>
           </div>
         </div>
@@ -93,6 +93,9 @@ function Shelf() {
           </div>
         </div>
       </div>
+      <h1 className="absolute bottom-0 m-2 text-xl text-gray-200">
+        My Board Game Shelf
+      </h1>
     </>
   );
 }
