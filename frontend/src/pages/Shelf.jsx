@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import ExportContextUser from "../contexts/UserContext";
 import AddGame from "../components/AddGame";
-import GameFilter from "../components/GameFilter";
 
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * max);
@@ -18,6 +17,7 @@ const marginRandom = ["mx-1", "mx-2", "mx-0", "mx-3"];
 
 function Shelf() {
   const { user } = useContext(ExportContextUser.UserContext);
+  const [modal, setModal] = useState(false);
   const [collection, setCollection] = useState();
   const [displayedGames, setDisplayedGames] = useState();
 
@@ -35,17 +35,38 @@ function Shelf() {
         setDisplayedGames(result.data.filter((bg) => bg.has === 1));
       })
       .catch((err) => console.warn(err));
-    console.log(collection);
+    console.warn(collection);
   }, [user]);
 
   return (
     <>
-      <h1>Ma Ludothèque</h1>
+      <h1>My Board Game Shelf</h1>
       <div className="bg-yellow-800 w-4/5 h-5/6 shadow-lg">
+        {modal && (
+          <div className="absolute inset-0 z-20 bg-gray-100 flex justify-center items-center float-left mx-2 my-20 border-2 border-gray-400">
+            <AddGame
+              collection={collection}
+              setModal={setModal}
+              displayedGames={displayedGames}
+            />
+          </div>
+        )}
         <div className="absolute right-16 mt-7">
           <div className="flex flex-col">
-            <AddGame />
-            <GameFilter />
+            <button
+              type="button"
+              className="border-4 rounded-full border-yellow-500/30 h-14 w-14 text-yellow-500/30 text-xl font-semibold bg-yellow-600/30 hover:bg-yellow-400/30"
+              onClick={() => setModal(true)}
+            >
+              New
+            </button>
+            <button
+              type="button"
+              className="mt-2 border-4 rounded-full border-yellow-500/30 h-14 w-14 text-yellow-500/30 text-xl font-semibold bg-yellow-600/30 hover:bg-yellow-400/30"
+              onClick={() => setModal(!modal)}
+            >
+              Sort
+            </button>
           </div>
         </div>
         <div className="bg-yellow-700 m-5 h-5/6 big-shadow-inner flex flex-col justify-end flex-wrap p-4 pb-1">

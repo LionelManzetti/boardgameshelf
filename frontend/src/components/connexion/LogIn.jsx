@@ -57,7 +57,7 @@ function Login() {
             className="text-lg mt-3 text-left w-full text-gray-600"
             htmlFor="password"
           >
-            Mot de passe
+            Password
             <input
               className="border rounded-md text-sm py-1 px-2 w-full"
               type="password"
@@ -80,7 +80,7 @@ function Login() {
         type="button"
         onClick={() => navigate("/signin")}
       >
-        Pas encore de compte ? S'inscrire
+        No account ? Signin
       </button>
     </div>
   );

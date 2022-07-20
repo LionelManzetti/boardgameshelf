@@ -47,7 +47,7 @@ function Signin() {
               className="text-lg mt-3 text-left w-full text-gray-600"
               htmlFor="name"
             >
-              Prénom
+              Name
               <input
                 className="border rounded-md text-sm py-1 px-2 w-full"
                 type="text"
@@ -74,7 +74,7 @@ function Signin() {
             className="text-lg mt-3 text-left w-full text-gray-600"
             htmlFor="password"
           >
-            Mot de passe
+            Password
             <input
               className="border rounded-md text-sm py-1 px-2 w-full"
               type="password"
@@ -95,7 +95,7 @@ function Signin() {
           type="button"
           onClick={() => navigate("/")}
         >
-          Déjà inscrit ? Se connecter
+          Already registered ? Login
         </button>
       </div>
     </div>
