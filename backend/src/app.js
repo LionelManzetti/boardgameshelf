@@ -1,45 +1,42 @@
 const express = require("express");
-const fs = require("fs");
 const path = require("path");
+
 const cors = require("cors");
-const router = require("./router");
+
+const cookieParser = require("cookie-parser");
+
+// let's create express app
 
 const app = express();
 
 // use some application-level middlewares
+app.use(cookieParser());
 app.use(
   cors({
     origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
     optionsSuccessStatus: 200,
+    credentials: true,
   })
 );
 
 app.use(express.json());
 
-// Serve the public folder for public resources
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Serve REACT APP
-app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
+const router = require("./router");
 
-// API routes
 app.use(router);
 
-// Redirect all requests to the REACT app
-const reactIndexFile = path.join(
-  __dirname,
-  "..",
-  "..",
-  "frontend",
-  "dist",
-  "index.html"
-);
+app.get("*", (req, res) => {
+  if (req.path.includes("public")) {
+    const urlpath = req.path.split("/");
 
-if (fs.existsSync(reactIndexFile)) {
-  app.get("*", (req, res) => {
-    res.sendFile(reactIndexFile);
-  });
-}
+    res.sendFile(path.join(__dirname, "..", "public", urlpath[2], urlpath[3]));
+  } else {
+    res.sendFile(path.join(__dirname, "..", "..", "frontend", "index.html"));
+  }
+});
+// load router
 
 // ready to export
 module.exports = app;

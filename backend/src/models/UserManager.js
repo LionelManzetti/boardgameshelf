@@ -3,17 +3,23 @@ const AbstractManager = require("./AbstractManager");
 class UserManager extends AbstractManager {
   static table = "user";
 
-  insert(item) {
+  findOne(email) {
+    return this.connection
+      .query(`SELECT * FROM ${this.table} WHERE email = ?`, [email])
+      .then((user) => user[0][0]);
+  }
+
+  insert(name, email, hash) {
     return this.connection.query(
-      `insert into ${UserManager.table} (title) values (?)`,
-      [item.title]
+      `INSERT INTO ${this.table} (name, email, hashedpassword) VALUES ( ?, ?, ? )`,
+      [name, email, hash]
     );
   }
 
-  update(item) {
+  update(user, id) {
     return this.connection.query(
-      `update ${UserManager.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      `UPDATE ${this.table}  SET ? WHERE user_id = ?`,
+      [user, id]
     );
   }
 }

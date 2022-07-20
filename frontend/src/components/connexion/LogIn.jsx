@@ -29,7 +29,7 @@ function Login() {
         handleUser(res.data);
         notifySuccess("Connexion réussie, redirection en cours");
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/shelf");
         }, 1500);
       })
       .catch(() => notifyError("L'email ou le mot de passe est incorrect"));
@@ -73,14 +73,13 @@ function Login() {
             type="button"
             value="Connexion"
             onClick={onSubmit}
-            // onClick={() => navigate("/shelf")}
           />
         </form>
       </div>
       <button
         className="text-xs text-gray-600 hover:italic"
         type="button"
-        onClick={() => navigate("/shelf")}
+        onClick={() => navigate("/signin")}
       >
         Pas encore de compte ? S'inscrire
       </button>

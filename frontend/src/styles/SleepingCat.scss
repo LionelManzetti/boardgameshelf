@@ -96,7 +96,7 @@ $k-right-ear: (
   $total-kf: rotateZ(-16deg),
 );
 
-$tail-interval: (11 - 7.5) / $tail-wags;
+$tail-interval: calc((11 - 7.5) / $tail-wags);
 
 @mixin effect($name, $kf) {
   @keyframes #{$name} {

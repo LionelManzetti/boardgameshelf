@@ -29,7 +29,7 @@ function Signin() {
         handleUser(res.data);
         notifySuccess("Connexion réussie, redirection en cours");
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/shelf");
         }, 1500);
       })
       .catch(() => {

@@ -31,7 +31,7 @@ function Shelf() {
   ];
 
   return (
-    <div className="bg-yellow-800 w-4/5 h-5/6 mt-16 z-10 shadow-lg">
+    <div className="bg-yellow-800 w-4/5 h-5/6 mt-24 z-10 shadow-lg">
       <div className="bg-yellow-700 m-5 h-5/6 big-shadow-inner flex flex-col justify-end flex-wrap p-4">
         {boardGames.map((game, ind) => (
           <div

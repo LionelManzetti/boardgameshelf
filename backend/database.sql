@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `boardgameshelf`.`user_has_boardgame` ;
 
 
 CREATE TABLE IF NOT EXISTS `boardgameshelf`.`user` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `hashedpassword` VARCHAR(255) NOT NULL,
