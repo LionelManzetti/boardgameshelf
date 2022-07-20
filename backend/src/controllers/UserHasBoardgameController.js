@@ -1,9 +1,9 @@
 const models = require("../models");
 
-class BoardgameController {
+class UserHasBoardgameController {
   static browse = (req, res) => {
-    models.boardgame
-      .findAll()
+    models.user_has_boardgame
+      .findMany(req.params.userId)
       .then(([rows]) => {
         res.send(rows);
       })
@@ -14,7 +14,7 @@ class BoardgameController {
   };
 
   static read = (req, res) => {
-    models.boardgame
+    models.user_has_boardgame
       .find(req.params.id)
       .then(([rows]) => {
         if (rows[0] == null) {
@@ -36,7 +36,7 @@ class BoardgameController {
 
     item.id = parseInt(req.params.id, 10);
 
-    models.boardgame
+    models.user_has_boardgame
       .update(item)
       .then(([result]) => {
         if (result.affectedRows === 0) {
@@ -52,11 +52,26 @@ class BoardgameController {
   };
 
   static add = (req, res) => {
-    const item = req.body;
-    models.boardgame
-      .insert(item)
-      .then(([result]) => {
-        res.status(201).send({ ...item, id: result.insertId });
+    models.user_has_boardgame
+      .addToShelf(req.params.userId, req.params.boardgameId)
+      .then(() => {
+        res.status(201).send("Boardgame Added !");
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
+  static favorite = (req, res) => {
+    models.user_has_boardgame
+      .changeFavorites(
+        req.params.favorite,
+        req.params.userId,
+        req.params.boardgameId
+      )
+      .then(() => {
+        res.status(201).send("Boardgame Added !");
       })
       .catch((err) => {
         console.error(err);
@@ -65,8 +80,8 @@ class BoardgameController {
   };
 
   static delete = (req, res) => {
-    models.boardgame
-      .delete(req.params.id)
+    models.user_has_boardgame
+      .delete(req.params.userId, req.params.boardgameId)
       .then(() => {
         res.sendStatus(204);
       })
@@ -77,4 +92,4 @@ class BoardgameController {
   };
 }
 
-module.exports = BoardgameController;
+module.exports = UserHasBoardgameController;

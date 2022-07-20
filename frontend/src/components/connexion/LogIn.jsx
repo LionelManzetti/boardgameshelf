@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ToastContainer } from "react-toastify";
-import { notifySuccess, notifyError } from "../../services/toastify";
+import { notifyError } from "../../services/toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import ExportContextUser from "../../contexts/UserContext";
@@ -27,10 +27,9 @@ function Login() {
       )
       .then((res) => {
         handleUser(res.data);
-        notifySuccess("Connexion réussie, redirection en cours");
         setTimeout(() => {
           navigate("/shelf");
-        }, 1500);
+        }, 800);
       })
       .catch(() => notifyError("L'email ou le mot de passe est incorrect"));
   };

@@ -121,7 +121,6 @@ CREATE TABLE IF NOT EXISTS `boardgameshelf`.`user_has_boardgame` (
 INSERT INTO `user_has_boardgame` (`user_id`, `boardgame_boardgame_id`, `has`, `favorite`) VALUES
 (1, 1, 1, 0),
 (1, 2, 1, 1),
-(1, 3, 1, 0),
 (1, 4, 1, 0),
 (1, 5, 1, 0),
 (1, 6, 1, 1),
@@ -143,13 +142,13 @@ INSERT INTO `user_has_boardgame` (`user_id`, `boardgame_boardgame_id`, `has`, `f
 (1, 22, 0, 0),
 (1, 23, 0, 0),
 (1, 24, 0, 0),
-(2, 25, 0, 0),
-(2, 26, 0, 0),
-(2, 27, 0, 1),
-(2, 28, 0, 0),
-(2, 29, 0, 1),
-(2, 30, 0, 0),
-(2, 31, 0, 0);
+(2, 25, 1, 0),
+(2, 26, 1, 0),
+(2, 27, 1, 1),
+(2, 28, 1, 0),
+(2, 29, 1, 1),
+(2, 30, 1, 0),
+(2, 31, 1, 0);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

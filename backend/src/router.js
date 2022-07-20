@@ -6,6 +6,7 @@ const {
   BoardgameController,
   UserController,
   AuthController,
+  UserHasBoardgameController,
 } = require("./controllers");
 
 const router = express.Router();
@@ -22,5 +23,17 @@ router.delete("/boardgames/:id", BoardgameController.delete);
 router.get("/users", UserController.browse);
 router.get("/users/:id", UserController.read);
 router.put("/users/:id", UserController.edit);
+router.get("/users/findNewGames/:id", UserController.findNew);
+
+router.get("/usershelf/:userId", UserHasBoardgameController.browse);
+router.post("/usershelf/:userId/:boardgameId", UserHasBoardgameController.add);
+router.put(
+  "/usershelf/favorites/:favorite/:userId/:boardgameId",
+  UserHasBoardgameController.favorite
+);
+router.delete(
+  "/usershelf/:userId/:boardgameId",
+  UserHasBoardgameController.delete
+);
 
 module.exports = router;

@@ -1,11 +1,14 @@
+import React from "react";
+
 import { Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import React from "react";
+import Menu from "../Menu";
 
-function DashboardLayout() {
+function AppLayout() {
   return (
-    <div className="flex h-screen w-screen flex-col bg-gray-200 items-center shadow-inner">
+    <div className="flex h-screen flex-col items-center shadow-inner">
+      <Menu />
       <motion.div
         initial={{ opacity: 1, x: 500, zIndex: 10 }}
         animate={{ opacity: 1, x: 0 }}
@@ -19,4 +22,4 @@ function DashboardLayout() {
     </div>
   );
 }
-export default DashboardLayout;
+export default AppLayout;
