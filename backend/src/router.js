@@ -1,13 +1,15 @@
 const express = require("express");
 
-const { ItemController } = require("./controllers");
+const { BoardgameController, UserController } = require("./controllers");
 
 const router = express.Router();
 
-router.get("/items", ItemController.browse);
-router.get("/items/:id", ItemController.read);
-router.put("/items/:id", ItemController.edit);
-router.post("/items", ItemController.add);
-router.delete("/items/:id", ItemController.delete);
+router.get("/boardgames", BoardgameController.browse);
+router.get("/boardgames/:id", BoardgameController.read);
+router.put("/boardgames/:id", BoardgameController.edit);
+router.post("/boardgames", BoardgameController.add);
+router.delete("/boardgames/:id", BoardgameController.delete);
+
+router.get("/users", UserController.browse);
 
 module.exports = router;

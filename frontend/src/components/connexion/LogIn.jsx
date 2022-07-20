@@ -80,7 +80,7 @@ function Login() {
       <button
         className="text-xs text-gray-600 hover:italic"
         type="button"
-        onClick={() => navigate("/signin")}
+        onClick={() => navigate("/shelf")}
       >
         Pas encore de compte ? S'inscrire
       </button>

@@ -33,11 +33,13 @@ function Shelf() {
   return (
     <div className="bg-yellow-800 w-4/5 h-5/6 mt-16 z-10 shadow-lg">
       <div className="bg-yellow-700 m-5 h-5/6 big-shadow-inner flex flex-col justify-end flex-wrap p-4">
-        {boardGames.map((game) => (
+        {boardGames.map((game, ind) => (
           <div
             className={`${colorRandom[getRandomInt(4)]} ${
               marginRandom[getRandomInt(4)]
-            } w-5/12 lg:w-1/12 text-gray-200 text-base p-1 mb-1 truncate shadow-md hover:rotate-2`}
+            } w-5/12 lg:w-1/12 text-gray-200 text-base p-1 mb-1 truncate shadow-md hover:rotate-2 ${
+              ind > 10 ? "hidden lg:flex" : ""
+            }`}
           >
             {game}
           </div>
