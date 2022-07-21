@@ -23,6 +23,7 @@ USE `boardgameshelf` ;
 DROP TABLE IF EXISTS `boardgameshelf`.`user` ;
 DROP TABLE IF EXISTS `boardgameshelf`.`boardgame` ;
 DROP TABLE IF EXISTS `boardgameshelf`.`user_has_boardgame` ;
+DROP TABLE IF EXISTS `boardgameshelf`.`user_has_friend` ;
 
 
 CREATE TABLE IF NOT EXISTS `boardgameshelf`.`user` (
@@ -35,7 +36,12 @@ CREATE TABLE IF NOT EXISTS `boardgameshelf`.`user` (
 
 INSERT INTO `user` (`id`, `name`, `email`, `hashedpassword`) VALUES
 (1, 'Jean Jean', 'jean.jean@jeanmail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
-(2, 'Benoyt', 'benoyt.vendanges@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo');
+(2, 'Benoyt', 'benoyt.vendanges@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
+(3, 'Clarisse', 'clarisse.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
+(4, 'Paul Tergeist', 'paul.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
+(5, 'Grimoare', 'terry.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
+(6, 'Clemoufle', 'clem.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
+(7, 'Jujuck', 'Jujuck.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo');
 -- -----------------------------------------------------
 -- Table `boardgameshelf`.`boardgame`
 -- -----------------------------------------------------
@@ -142,7 +148,48 @@ INSERT INTO `user_has_boardgame` (`user_id`, `boardgame_boardgame_id`, `has`, `f
 (2, 28, 1, 0),
 (2, 29, 1, 1),
 (2, 30, 1, 0),
-(2, 31, 1, 0);
+(3, 31, 1, 0),
+(3, 32, 1, 0),
+(3, 33, 1, 1),
+(3, 34, 1, 0),
+(3, 35, 1, 1),
+(3, 36, 1, 0),
+(4, 19, 1, 0),
+(4, 20, 1, 0),
+(4, 21, 1, 0),
+(4, 22, 1, 0),
+(4, 23, 1, 0),
+(4, 24, 1, 0),
+(5, 12, 1, 0),
+(5, 13, 1, 0),
+(6, 14, 1, 0),
+(6, 15, 1, 0),
+(7, 16, 1, 0),
+(7, 17, 1, 0);
+-- -----------------------------------------------------
+-- Table `boardgameshelf`.`user_has_friends`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `boardgameshelf`.`user_has_friend` (
+  `user_id` INT NOT NULL,
+  `friend_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `friend_id`),
+  CONSTRAINT `fk_user_has_user_id`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `boardgameshelf`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_friend`
+    FOREIGN KEY (`friend_id`)
+    REFERENCES `boardgameshelf`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+INSERT INTO `user_has_friend` (`user_id`, `friend_id`) VALUES
+(1, 2),
+(1, 3),
+(2, 1);
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -27,9 +27,9 @@ class AuthController {
 
     try {
       const hash = await hashPassword(password);
-      await models.user.insert(name, email, hash);
+      const newUser = await models.user.insert(name, email, hash);
 
-      res.status(201).json({ email: req.body.email });
+      res.status(201).json({ email: req.body.email, id: newUser[0].insertId });
     } catch (err) {
       res.status(500).json({
         error: err.message,

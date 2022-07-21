@@ -19,7 +19,7 @@ class UserHasBoardgameManager extends AbstractManager {
 
   changeFavorites(favorite, userId, boardgameId) {
     return this.connection.query(
-      `update ${UserHasBoardgameManager.table} set favorite = ? values WHERE user_id = ? AND boardgame_boardgame_id = ?`,
+      `update ${UserHasBoardgameManager.table} set favorite = ? WHERE user_id = ? AND boardgame_boardgame_id = ?`,
       [favorite, userId, boardgameId]
     );
   }

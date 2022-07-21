@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import ExportContextUser from "../contexts/UserContext";
 import AddGame from "../components/AddGame";
+import BoardGameDetails from "../components/BoardGameDetails";
 
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * max);
@@ -17,7 +18,8 @@ const marginRandom = ["mx-1", "mx-2", "mx-0", "mx-3"];
 
 function Shelf() {
   const { user } = useContext(ExportContextUser.UserContext);
-  const [modal, setModal] = useState(false);
+  const [addNewModal, setAddNewModal] = useState(false);
+  const [gameDetails, setGameDetails] = useState(false);
   const [collection, setCollection] = useState();
   const [displayedGames, setDisplayedGames] = useState();
 
@@ -32,7 +34,7 @@ function Shelf() {
   }, [user]);
 
   const handleSortByFav = () => {
-    if (collection === displayedGames) {
+    if (collection.length === displayedGames.length) {
       setDisplayedGames(displayedGames.filter((bg) => bg.favorite === 1));
     } else {
       setDisplayedGames(collection);
@@ -42,12 +44,20 @@ function Shelf() {
   return (
     <>
       <div className="bg-yellow-800 w-4/5 h-5/6 shadow-lg">
-        {modal && (
+        {addNewModal && (
           <div className="absolute inset-0 z-20 bg-gray-100 flex justify-center items-center float-left mx-2 my-20 border-2 border-gray-400">
             <AddGame
               collection={collection}
-              setModal={setModal}
+              setModal={setAddNewModal}
               displayedGames={collection}
+            />
+          </div>
+        )}
+        {gameDetails && (
+          <div className="absolute inset-0 z-20 bg-gray-100 flex justify-center items-center float-left mx-2 my-20 border-2 border-gray-400">
+            <BoardGameDetails
+              game={gameDetails}
+              setGameDetails={setGameDetails}
             />
           </div>
         )}
@@ -56,7 +66,7 @@ function Shelf() {
             <button
               type="button"
               className="border-4 rounded-full border-yellow-500/30 h-14 w-14 text-yellow-500/30 text-xl font-semibold bg-yellow-600/30 hover:bg-yellow-400/30"
-              onClick={() => setModal(true)}
+              onClick={() => setAddNewModal(true)}
             >
               New
             </button>
@@ -72,16 +82,18 @@ function Shelf() {
         <div className="bg-yellow-700 m-5 h-5/6 big-shadow-inner flex flex-col justify-end flex-wrap p-4 pb-1">
           {displayedGames &&
             displayedGames.map((game, ind) => (
-              <div
+              <button
+                type="button"
                 className={`${colorRandom[getRandomInt(4)]} ${
                   marginRandom[getRandomInt(4)]
                 } w-5/12 lg:w-1/12 text-gray-200 text-base p-1 mb-1 truncate shadow-md hover:rotate-2 ${
                   ind > 20 ? "hidden lg:flex" : ""
                 }`}
                 key={game.id}
+                onClick={() => setGameDetails(game)}
               >
                 {game.name}
-              </div>
+              </button>
             ))}
         </div>
         <div className="flex mx-5 shadow-yellow-900 justify-around">
