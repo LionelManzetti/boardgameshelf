@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import ExportContextUser from "../contexts/UserContext";
 import AddGame from "../components/AddGame";
@@ -9,10 +10,10 @@ const getRandomInt = (max) => {
 };
 
 const colorRandom = [
-  "bg-orange-800 border-r-8 border-t-4 border-orange-900",
-  "bg-cyan-800 border-r-8 border-t-4 border-cyan-900",
-  "bg-green-800 border-r-8 border-t-4 border-green-900",
-  "bg-yellow-600 border-r-8 border-t-4 border-yellow-800",
+  "bg-orange-800 border-r-8 border-t-4 border-orange-900 text-orange-200 ",
+  "bg-cyan-800 border-r-8 border-t-4 border-cyan-900 text-cyan-200 ",
+  "bg-green-800 border-r-8 border-t-4 border-green-900 text-green-200 ",
+  "bg-yellow-600 border-r-8 border-t-4 border-yellow-800 text-yellow-200 ",
 ];
 const marginRandom = ["mx-1", "mx-2", "mx-0", "mx-3"];
 
@@ -44,23 +45,37 @@ function Shelf() {
   return (
     <>
       <div className="bg-yellow-800 w-4/5 h-5/6 shadow-lg">
-        {addNewModal && (
-          <div className="absolute inset-0 z-20 bg-gray-100 flex justify-center items-center float-left mx-2 my-20 border-2 border-gray-400">
-            <AddGame
-              collection={collection}
-              setModal={setAddNewModal}
-              displayedGames={collection}
-            />
-          </div>
-        )}
-        {gameDetails && (
-          <div className="absolute inset-0 z-20 bg-gray-100 flex justify-center items-center float-left mx-2 my-20 border-2 border-cyan-700">
-            <BoardGameDetails
-              game={gameDetails}
-              setGameDetails={setGameDetails}
-            />
-          </div>
-        )}
+        <AnimatePresence exitBeforeEnter initial={false}>
+          {addNewModal && (
+            <motion.div
+              initial={{ opacity: 1, y: -500, zIndex: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 1, y: 1000 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 z-20 bg-gray-100 flex justify-center items-center float-left mx-2 my-20 border-2 border-green-600"
+            >
+              <AddGame
+                collection={collection}
+                setModal={setAddNewModal}
+                displayedGames={collection}
+              />
+            </motion.div>
+          )}
+          {gameDetails && (
+            <motion.div
+              initial={{ opacity: 1, y: 500, zIndex: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 1, y: -1000 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 z-20 bg-gray-100 flex justify-center items-center float-left mx-2 my-20 border-2 border-cyan-700"
+            >
+              <BoardGameDetails
+                game={gameDetails}
+                setGameDetails={setGameDetails}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div className="absolute right-16 mt-7">
           <div className="flex flex-col">
             <button
@@ -86,7 +101,7 @@ function Shelf() {
                 type="button"
                 className={`${colorRandom[getRandomInt(4)]} ${
                   marginRandom[getRandomInt(4)]
-                } w-5/12 lg:w-1/12 text-gray-200 text-base p-1 mb-1 truncate shadow-md hover:rotate-2 ${
+                } w-5/12 lg:w-1/12 text-base text-left p-1 pl-2 mb-1 truncate shadow-md hover:rotate-2 ${
                   ind > 20 ? "hidden lg:flex" : ""
                 }`}
                 key={game.id}
@@ -105,7 +120,7 @@ function Shelf() {
           </div>
         </div>
       </div>
-      <h1 className="absolute bottom-0 m-2 text-xl text-gray-200">
+      <h1 className="absolute bottom-0 m-2 text-xl text-yellow-200">
         My Board Game Shelf
       </h1>
     </>

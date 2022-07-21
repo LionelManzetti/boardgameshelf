@@ -17,7 +17,7 @@ function Menu() {
         style={({ isActive }) =>
           isActive
             ? {
-                border: "3px solid rgba(0, 0, 0, 0.15)",
+                border: "3px solid rgb(133, 77, 14)",
               }
             : {
                 marginTop: 0,
@@ -27,7 +27,7 @@ function Menu() {
         <img
           src={shelf}
           alt="shelf"
-          className="w-10 h-10 max-w-10 rounded-xl border"
+          className="w-10 h-10 max-w-10 rounded-xl"
         />
       </NavLink>
 
@@ -39,7 +39,7 @@ function Menu() {
         style={({ isActive }) =>
           isActive
             ? {
-                border: "3px solid rgba(0, 0, 0, 0.15)",
+                border: "3px solid rgb(21, 94, 117)",
               }
             : {
                 marginTop: 0,
@@ -57,7 +57,7 @@ function Menu() {
         style={({ isActive }) =>
           isActive
             ? {
-                border: "3px solid rgba(0, 0, 0, 0.15)",
+                border: "3px solid rgb(22, 101, 54)",
               }
             : {
                 marginTop: 0,
@@ -75,7 +75,7 @@ function Menu() {
         style={({ isActive }) =>
           isActive
             ? {
-                border: "3px solid rgba(0, 0, 0, 0.15)",
+                border: "3px solid rgb(153, 27, 27)",
               }
             : {
                 marginTop: 0,

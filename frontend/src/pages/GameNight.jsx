@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
 import ExportContextUser from "../contexts/UserContext";
-// import { motion } from "framer-motion";
 
 const calculateDuration = (startingHour, prog) => {
   let totalMinutes = 0;
@@ -158,163 +158,232 @@ function GameNight() {
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-around">
-        <h2 className="text-xl m-2"> All right {user.name} !</h2>
-        <p>Let's plan your next boardgame night :</p>
-        {slide === "players" && (
-          <div className="flex flex-col items-center w-full">
-            <p>First, select the number of players (including yourself) :</p>
-            <input
-              type="number"
-              placeholder="Number of players"
-              min="1"
-              max="15"
-              defaultValue={numberPlayers}
-              onChange={(e) => setNumberPlayers(e.target.value)}
-            />
-            <p>Any friends from BGS playing ?</p>
-            {friends &&
-              friends.map((friend) => (
-                <div className="flex justify-between w-1/2">
-                  <p>{friend.name}</p>
-                  <button type="button" onClick={() => handleSelected(friend)}>
-                    add
-                  </button>
-                </div>
-              ))}
+      <div className="flex flex-col items-center justify-around text-green-800 m-5">
+        <h2 className="text-2xl m-2 font-semibold mb-5">
+          All right {user.name} ! 📝
+        </h2>
+        <AnimatePresence exitBeforeEnter initial={false}>
+          {slide === "players" && (
+            <motion.div
+              key="players"
+              initial={{ x: 500 }}
+              animate={{ x: 0 }}
+              exit={{ x: -500 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center w-full bg-white p-4 shadow-lg rounded-br-3xl"
+            >
+              <p>Let's plan your next boardgame night :</p>
+              <p>First, select the number of players (including yourself) :</p>
+              <input
+                type="number"
+                placeholder="Number of players"
+                min="1"
+                max="15"
+                defaultValue={numberPlayers}
+                onChange={(e) => setNumberPlayers(e.target.value)}
+              />
+              <p>Any friends from BGS playing ?</p>
+              {friends &&
+                friends.map((friend) => (
+                  <div className="flex justify-between w-1/2">
+                    <p>{friend.name}</p>
+                    <button
+                      type="button"
+                      onClick={() => handleSelected(friend)}
+                    >
+                      add
+                    </button>
+                  </div>
+                ))}
 
-            <div className="flex justify-around flex-wrap">
-              {selectedFriends &&
-                selectedFriends.map((selection, index) => (
+              <div className="flex justify-around flex-wrap">
+                {selectedFriends &&
+                  selectedFriends.map((selection, index) => (
+                    <button
+                      type="button"
+                      className="bg-gray-400 py-1 px-2 m-1 rounded-lg text-white"
+                      onClick={() => deleteSelected(index)}
+                      key={selection.id}
+                    >
+                      {selection.name} x
+                    </button>
+                  ))}
+              </div>
+              <button
+                className="mt-4 text-white px-4 py-1 bg-green-800 rounded-lg shadow-md self-end"
+                type="button"
+                onClick={() => setSlide("categories")}
+              >
+                Next
+              </button>
+            </motion.div>
+          )}
+          {slide === "categories" && (
+            <motion.div
+              key="categories"
+              initial={{ x: 500 }}
+              animate={{ x: 0 }}
+              exit={{ x: -500 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center w-full bg-white p-4 shadow-lg rounded-br-3xl"
+            >
+              <p>Select category preferences (min 1, max 4) :</p>
+              <select multiple size={5} className="mr-5">
+                {categories.map((cat) => (
+                  <option
+                    key={cat}
+                    onClick={() => handleSelected(cat)}
+                    className="p-1 flex"
+                  >
+                    {cat}
+                  </option>
+                ))}
+              </select>
+              {selectedCategory &&
+                selectedCategory.map((selection) => (
                   <button
                     type="button"
                     className="bg-gray-400 py-1 px-2 m-1 rounded-lg text-white"
-                    onClick={() => deleteSelected(index)}
-                    key={selection.id}
+                    onClick={() => deleteSelected(selection)}
+                    key={selection}
                   >
-                    {selection.name} x
+                    {selection} x
                   </button>
                 ))}
-            </div>
-            <button type="button" onClick={() => setSlide("categories")}>
-              Next
-            </button>
-          </div>
-        )}
-        {slide === "categories" && (
-          <div className="flex flex-col items-center w-full">
-            <p>Select category preferences (min 1, max 4) :</p>
-            <select multiple size={5} className="mr-5">
-              {categories.map((cat) => (
-                <option
-                  key={cat}
-                  onClick={() => handleSelected(cat)}
-                  className="p-1 flex"
-                >
-                  {cat}
-                </option>
-              ))}
-            </select>
-            {selectedCategory &&
-              selectedCategory.map((selection) => (
-                <button
-                  type="button"
-                  className="bg-gray-400 py-1 px-2 m-1 rounded-lg text-white"
-                  onClick={() => deleteSelected(selection)}
-                  key={selection}
-                >
-                  {selection} x
-                </button>
-              ))}
-            <p>Minimum age amongst players :</p>
-            <input
-              type="number"
-              placeholder="Duration in minutes"
-              min="1"
-              max="99"
-              defaultValue={minAge}
-              onChange={(e) => setMinAge(e.target.value)}
-            />
-            <button type="button" onClick={() => setSlide("timeline")}>
-              Next
-            </button>
-          </div>
-        )}
-        {slide === "timeline" && (
-          <div className="flex flex-col items-center w-full">
-            <p>Timeline</p>
-            <p>For how long are you going to play ?</p>
-            <input
-              type="number"
-              placeholder="Duration in minutes"
-              min="5"
-              max="600"
-              defaultValue={timeline}
-              onChange={(e) => setTimeline(e.target.value)}
-            />
-            <p>Starting hour :</p>
-            <input
-              type="number"
-              placeholder="Duration in minutes"
-              min="0"
-              max="23"
-              defaultValue={startingHour}
-              onChange={(e) => setStartingHour(e.target.value)}
-            />
-            <button type="button" onClick={() => setSlide("summary")}>
-              Next
-            </button>
-          </div>
-        )}
-        {slide === "summary" && (
-          <div className="flex flex-col items-center w-full">
-            <p>Summary</p>
-            <p>{numberPlayers} players</p>
-            {selectedFriends && (
+              <p>Minimum age amongst players :</p>
+              <input
+                type="number"
+                placeholder="Duration in minutes"
+                min="1"
+                max="99"
+                defaultValue={minAge}
+                onChange={(e) => setMinAge(e.target.value)}
+              />
+              <button
+                className="mt-4 text-white px-4 py-1 bg-green-800 rounded-lg shadow-md self-end"
+                type="button"
+                onClick={() => setSlide("timeline")}
+              >
+                Next
+              </button>
+            </motion.div>
+          )}
+          {slide === "timeline" && (
+            <motion.div
+              key="timeline"
+              initial={{ x: 500 }}
+              animate={{ x: 0 }}
+              exit={{ x: -500 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center w-full bg-white p-4 shadow-lg rounded-br-3xl"
+            >
+              <p>Timeline</p>
+              <p>For how long are you going to play ?</p>
+              <input
+                type="number"
+                placeholder="Duration in minutes"
+                min="5"
+                max="600"
+                defaultValue={timeline}
+                onChange={(e) => setTimeline(e.target.value)}
+              />
+              <p>Starting hour :</p>
+              <input
+                type="number"
+                placeholder="Duration in minutes"
+                min="0"
+                max="23"
+                defaultValue={startingHour}
+                onChange={(e) => setStartingHour(e.target.value)}
+              />
+              <button
+                className="mt-4 text-white px-4 py-1 bg-green-800 rounded-lg shadow-md self-end"
+                type="button"
+                onClick={() => setSlide("summary")}
+              >
+                Next
+              </button>
+            </motion.div>
+          )}
+          {slide === "summary" && (
+            <motion.div
+              key="summary"
+              initial={{ x: 500 }}
+              animate={{ x: 0 }}
+              exit={{ y: -500 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center w-full bg-white p-4 shadow-lg rounded-b-3xl"
+            >
+              <p>Summary</p>
+              <p>{numberPlayers} players</p>
+              {selectedFriends && (
+                <div>
+                  Friends from Board Game Shelf :
+                  {selectedFriends.map((fr) => (
+                    <li>{fr.name}</li>
+                  ))}
+                </div>
+              )}
+              <p>Category preferences :</p>
               <div>
-                Friends from Board Game Shelf :
-                {selectedFriends.map((fr) => (
-                  <li>{fr.name}</li>
+                {selectedCategory.map((cate) => (
+                  <li>{cate}</li>
                 ))}
               </div>
-            )}
-            <p>Category preferences :</p>
-            <div>
-              {selectedCategory.map((cate) => (
-                <li>{cate}</li>
-              ))}
-            </div>
-            <p>Minimum age : {minAge} years old</p>
-            <p>Duration : {timeline} minutes</p>
-            <p>Beginning hour : {startingHour}:00</p>
-            <button type="button" onClick={() => generatePlanning()}>
-              Generate planning
-            </button>
-          </div>
-        )}
-        {slide === "result" && (
-          <div className="flex flex-col items-center w-full">
-            <p>Program for your evening :</p>
-            <p>Game Night starts at : {startingHour}:00</p>
-            {program &&
-              program.map((gameProgrammed) => (
-                <div className="flex justify-around w-full">
-                  <p>{gameProgrammed.name}</p>
-                  <p>Duration : {Math.floor(gameProgrammed.duration)}</p>
-                </div>
-              ))}
-            <p>
-              Estimated finish time at{" : "}
-              {calculateDuration(startingHour, program)}
-            </p>
-
-            <button type="button" onClick={() => setSlide("players")}>
-              Start again ?
-            </button>
-          </div>
-        )}
+              <p>Minimum age : {minAge} years old</p>
+              <p>Duration : {timeline} minutes</p>
+              <p>Beginning hour : {startingHour}:00</p>
+              <p>All good ?</p>
+              <button
+                className="mt-4 text-white px-4 py-1 bg-green-800 rounded-lg shadow-md"
+                type="button"
+                onClick={() => generatePlanning()}
+              >
+                Generate planning
+              </button>
+            </motion.div>
+          )}
+          {slide === "result" && (
+            <motion.div
+              key="result"
+              initial={{ y: -500 }}
+              animate={{ y: 0 }}
+              exit={{ x: 500 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center w-full bg-white p-4 shadow-lg rounded-bl-3xl"
+            >
+              <p>Program for your evening :</p>
+              <p>Game Night starts at : {startingHour}:00</p>
+              {program &&
+                program.map((gameProgrammed) => (
+                  <div className="flex justify-around w-full">
+                    <p>{gameProgrammed.name}</p>
+                    <p>Duration : {Math.floor(gameProgrammed.duration)}</p>
+                  </div>
+                ))}
+              <p>
+                Estimated finish time at{" : "}
+                {calculateDuration(startingHour, program)}
+              </p>
+              <button
+                className="mt-4 text-white px-4 py-1 mb-2 bg-green-800 rounded-lg shadow-md"
+                type="button"
+                onClick={() => setSlide("players")}
+              >
+                Send me the program ✉️
+              </button>
+              <button
+                className="mt-4 text-white px-4 py-1 bg-green-800 rounded-lg shadow-md self-start"
+                type="button"
+                onClick={() => setSlide("players")}
+              >
+                Start again ?
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      <h1 className="absolute bottom-0 m-2 text-xl text-gray-200">
+      <h1 className="absolute bottom-0 m-2 text-xl text-green-200 w-full text-center">
         Board Game Night
       </h1>
     </div>

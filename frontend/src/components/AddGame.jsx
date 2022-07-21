@@ -55,38 +55,44 @@ function AddGame({ setModal, displayedGames }) {
   };
 
   return (
-    <div className="m-4 flex flex-col">
-      <h2>Add one or many boardgames to your collection :</h2>
+    <div className="border-8 border-green-800 big-shadow-inner w-full h-full flex flex-col items-center justify-center text-green-800 p-4">
+      <h3 className="text-3xl font-semibold mb-4">New games</h3>
+      <h2 className="mb-4">Add one or more boardgames to your collection :</h2>
       <input
         type="text"
-        placeholder="Type here"
+        placeholder="Enter title"
         onChange={(e) => setSearch(e.target.value)}
+        className="w-32 rounded-lg h-8 text-center"
       />
       {boardgames && (
-        <form onSubmit={handleSubmit} className="flex flex-col items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center w-full"
+        >
           <div className="flex items-center m-4">
-            <select multiple size={5} className="mr-5">
-              {boardgames
-                .filter((p) =>
-                  p.name.toLowerCase().includes(search.toLowerCase())
-                )
-                .map((b) => (
-                  // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-                  <option
-                    key={b.name}
-                    onClick={() => handleSelected(b)}
-                    className="p-1 flex"
-                    onMouseEnter={() => setPreview(b.image_url)}
-                  >
-                    {b.name}
-                  </option>
-                ))}
+            <select multiple size={5} className="w-32 rounded-lg text-center">
+              {search !== "" &&
+                boardgames
+                  .filter((p) =>
+                    p.name.toLowerCase().includes(search.toLowerCase())
+                  )
+                  .map((b) => (
+                    // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
+                    <option
+                      key={b.name}
+                      onClick={() => handleSelected(b)}
+                      className="p-1 flex"
+                      onMouseEnter={() => setPreview(b.image_url)}
+                    >
+                      {b.name}
+                    </option>
+                  ))}
             </select>
-            {preview && (
+            {search !== "" && preview && (
               <img
                 src={preview}
                 alt="test"
-                className="w-20 h-20 rounded-full"
+                className="w-20 h-20 rounded-full ml-4"
               />
             )}
           </div>
@@ -104,18 +110,23 @@ function AddGame({ setModal, displayedGames }) {
                 </button>
               ))}
           </div>
-          <button
-            type="submit"
-            className="px-2 py-1 bg-gray-400 m-2 rounded-lg text-white w-1/2"
-          >
-            Save
-          </button>
+          <div className="flex justify-around w-full">
+            <button
+              type="submit"
+              className="mt-4 text-white px-4 py-1 mb-2 bg-cyan-800 rounded-lg shadow-md w-1/3"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={() => setModal(false)}
+              className="mt-4 text-white px-4 py-1 mb-2 bg-green-800 rounded-lg shadow-md w-1/3"
+            >
+              Close
+            </button>
+          </div>
         </form>
       )}
-
-      <button type="button" onClick={() => setModal(false)} className="mt-4">
-        X
-      </button>
     </div>
   );
 }

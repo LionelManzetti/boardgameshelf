@@ -84,8 +84,8 @@ function BoardGameDetails({ game, setGameDetails }) {
         >
           ☆
         </div>
-        <p className="text-gray-500 p-2 border text-center text-sm">
-          {game.categories}
+        <p className="text-gray-500 p-2 border text-center text-sm ml-2">
+          Keywords: {game.categories}
         </p>
       </div>
       <div className="flex w-full justify-around">

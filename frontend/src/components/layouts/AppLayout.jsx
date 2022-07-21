@@ -13,7 +13,7 @@ function AppLayout() {
         initial={{ opacity: 1, x: 500, zIndex: 10 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 1, x: -500 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.5 }}
         className="flex flex-col items-center w-full h-full"
       >
         <Outlet />

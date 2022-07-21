@@ -104,11 +104,10 @@ function Profile() {
               </div>
             ))}
       </div>
-      <div className="absolute bottom-64 -z-10">
+      <div className="absolute bottom-64">
         <Sofa />
       </div>
-
-      <h1 className="absolute bottom-0 m-2 text-xl text-gray-200 w-full text-center">
+      <h1 className="absolute bottom-0 m-2 text-xl text-cyan-200 w-full text-center">
         My Profile
       </h1>
     </div>
