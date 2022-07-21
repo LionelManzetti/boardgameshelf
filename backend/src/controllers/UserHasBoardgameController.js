@@ -3,7 +3,7 @@ const models = require("../models");
 class UserHasBoardgameController {
   static browse = (req, res) => {
     models.user_has_boardgame
-      .findMany(req.params.userId)
+      .findMany(req.params.userId, req.query)
       .then(([rows]) => {
         res.send(rows);
       })

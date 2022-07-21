@@ -3,11 +3,18 @@ const AbstractManager = require("./AbstractManager");
 class UserHasBoardgameManager extends AbstractManager {
   static table = "user_has_boardgame";
 
-  findMany(id) {
-    return this.connection.query(
-      `SELECT * FROM  ${this.table} AS uhb INNER JOIN boardgame AS b ON b.boardgame_id = uhb.boardgame_boardgame_id where user_id = ?`,
-      [id]
-    );
+  findMany(id, query) {
+    let sql = `SELECT * FROM  ${this.table} AS uhb INNER JOIN boardgame AS b ON b.boardgame_id = uhb.boardgame_boardgame_id where user_id = ? `;
+    const sqlValues = [id];
+    const { filter } = query;
+    if (filter) {
+      const filterParams = filter.split("|");
+      filterParams.forEach((gameId) => {
+        sql += `AND b.boardgame_id != ? `;
+        sqlValues.push(gameId);
+      });
+    }
+    return this.connection.query(sql, sqlValues);
   }
 
   addToShelf(userId, boardgameId) {
