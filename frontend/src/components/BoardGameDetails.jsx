@@ -45,11 +45,17 @@ function BoardGameDetails({ game, setGameDetails }) {
   };
 
   return (
-    <div className="border-8 big-shadow-inner w-full h-full flex flex-col items-center justify-around">
+    <div className="border-8 border-cyan-800 big-shadow-inner w-full h-full flex flex-col items-center justify-around">
       <ToastContainer />
-      <div className="flex items-center justify-around w-full">
-        <h3 className="text-2xl">{game.name}</h3>
-        <img src={game.image_url} alt="test" className="max-h-32" />
+      <div className="flex items-center justify-between mx-4">
+        <h3 className="text-3xl font-semibold text-cyan-800 mr-4">
+          {game.name}
+        </h3>
+        <img
+          src={game.image_url}
+          alt="test"
+          className="max-h-32 rounded-full border-4 border-cyan-800 shadow-lg"
+        />
       </div>
       <div className="grid grid-cols-2">
         <p className="text-gray-500 p-1 border text-center">Players :</p>

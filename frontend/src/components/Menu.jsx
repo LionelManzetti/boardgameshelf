@@ -4,20 +4,20 @@ import { NavLink } from "react-router-dom";
 import gamenight from "../assets/icons/gamenight.png";
 import profile from "../assets/icons/profile.png";
 import shelf from "../assets/icons/shelf.png";
-import wishlist from "../assets/icons/wishlist.png";
+import help from "../assets/icons/help.png";
 
 function Menu() {
   return (
-    <div className="flex justify-around w-full m-5 mb-0 z-10">
+    <div className="flex justify-around w-full m-5 z-10">
       <NavLink
         to="shelf"
-        className={({ isActive }) => (isActive ? "active" : "inactive")}
+        className={({ isActive }) =>
+          isActive ? "active rounded-full" : "inactive"
+        }
         style={({ isActive }) =>
           isActive
             ? {
-                marginTop: 0,
-                marginBottom: 0,
-                paddingTop: 20,
+                border: "3px solid rgba(0, 0, 0, 0.15)",
               }
             : {
                 marginTop: 0,
@@ -27,64 +27,62 @@ function Menu() {
         <img
           src={shelf}
           alt="shelf"
-          className="w-10 h-10 max-w-10 hover:w-12 rounded-xl"
+          className="w-10 h-10 max-w-10 rounded-xl border"
         />
       </NavLink>
 
       <NavLink
         to="profile"
-        className={({ isActive }) => (isActive ? "active" : "inactive")}
+        className={({ isActive }) =>
+          isActive ? "active rounded-full" : "inactive"
+        }
         style={({ isActive }) =>
           isActive
             ? {
-                marginTop: 10,
+                border: "3px solid rgba(0, 0, 0, 0.15)",
               }
             : {
                 marginTop: 0,
               }
         }
       >
-        <img
-          src={profile}
-          alt="profile"
-          className="w-10 h-10 hover:w-12 rounded-xl"
-        />
+        <img src={profile} alt="profile" className="w-10 h-10 rounded-xl" />
       </NavLink>
 
       <NavLink
         to="gamenight"
-        className={({ isActive }) => (isActive ? "active" : "inactive")}
+        className={({ isActive }) =>
+          isActive ? "active rounded-full" : "inactive"
+        }
         style={({ isActive }) =>
           isActive
             ? {
-                marginTop: 10,
+                border: "3px solid rgba(0, 0, 0, 0.15)",
               }
             : {
                 marginTop: 0,
               }
         }
       >
-        <img
-          src={gamenight}
-          alt="gamenight"
-          className="w-10 h-10 hover:w-12 rounded-xl"
-        />
+        <img src={gamenight} alt="gamenight" className="w-10 h-10 rounded-xl" />
       </NavLink>
 
       <NavLink
-        to="wishlist"
-        className={({ isActive }) => (isActive ? "active" : "inactive")}
+        to="help"
+        className={({ isActive }) =>
+          isActive ? "active rounded-full" : "inactive"
+        }
         style={({ isActive }) =>
           isActive
             ? {
-                marginTop: 10,
+                border: "3px solid rgba(0, 0, 0, 0.15)",
               }
             : {
                 marginTop: 0,
               }
         }
       >
-        <img src={wishlist} alt="wishlist" className="w-10 h-10 hover:w-12" />
+        <img src={help} alt="help" className="w-10 h-10" />
       </NavLink>
     </div>
   );

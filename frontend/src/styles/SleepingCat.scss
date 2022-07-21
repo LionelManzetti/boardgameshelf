@@ -118,6 +118,7 @@ $tail-interval: calc((11 - 7.5) / $tail-wags);
 @include effect("right-ear", $k-right-ear);
 
 .main {
+  z-index: 3;
 
   .cat {
     width: 110px;
@@ -169,7 +170,7 @@ $tail-interval: calc((11 - 7.5) / $tail-wags);
   right: 0;
   border-bottom-right-radius: 5px;
   background: $purple;
-  z-index: 0;
+  z-index: 3;
 
   > .tail {
     animation: tail $duration none infinite;

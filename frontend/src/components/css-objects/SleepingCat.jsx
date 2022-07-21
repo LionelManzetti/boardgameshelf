@@ -4,7 +4,7 @@ import "../../styles/SleepingCat.scss";
 
 function SleepingCat() {
   return (
-    <div className="main z-10 absolute bottom-28 right-0">
+    <div className="main absolute bottom-28 right-0">
       <div className="cat">
         <div className="body" />
         <div className="head">

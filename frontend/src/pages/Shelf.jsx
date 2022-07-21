@@ -54,7 +54,7 @@ function Shelf() {
           </div>
         )}
         {gameDetails && (
-          <div className="absolute inset-0 z-20 bg-gray-100 flex justify-center items-center float-left mx-2 my-20 border-2 border-gray-400">
+          <div className="absolute inset-0 z-20 bg-gray-100 flex justify-center items-center float-left mx-2 my-20 border-2 border-cyan-700">
             <BoardGameDetails
               game={gameDetails}
               setGameDetails={setGameDetails}

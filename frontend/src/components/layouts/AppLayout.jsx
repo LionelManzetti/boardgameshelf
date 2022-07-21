@@ -18,7 +18,7 @@ function AppLayout() {
       >
         <Outlet />
       </motion.div>
-      <div className="bg-gray-500 h-32 absolute bottom-0 w-full shadow-inner" />
+      <div className="bg-gray-500 h-28 absolute bottom-0 w-full shadow-inner" />
     </div>
   );
 }

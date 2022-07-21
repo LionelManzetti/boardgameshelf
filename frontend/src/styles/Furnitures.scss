@@ -1,0 +1,302 @@
+@mixin border($b) {
+  border: $b solid $border;
+}
+
+$border: rgb(21 94 117);
+$sofa: rgb(28, 117, 145);
+$cactus: #71C26D;
+
+.sofaContainer, .sofa, .sofaBottomPart, .sofaArmrest, .sofaLeg, .picture, .lamp, .lampLeg, .pot, .cactus, .bricks, .sofaGlare {
+  position: absolute;
+}
+
+.sofa {
+  width: 200px;
+  height: 100px;
+  background-color: $sofa;
+  @include border(3px);
+  border-radius: 20px;
+  top: 50px;
+  left: 50px;
+  &:after {
+    position: absolute;
+    content: '';
+    width: 3px;
+    height: 60px;
+    background-color: $border;
+    top: 5px;
+    left: 100px;
+    border-radius: 3px;
+  }
+}
+
+.sofaBottomPart {
+  width: 230px;
+  height: 50px;
+  top: 70px;
+  left: -17px;
+  @include border(3px);
+  background-color: $sofa;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0px 10px 10px rgba(78, 78, 78, 0.815);
+}
+
+.sofaArmrest {
+  width: 40px;
+  height: 40px;
+  top: 30px;
+  left: -35px;
+  @include border(3px);
+  background-color: $sofa;
+  border-radius: 50%;
+  z-index: 2;
+  &:after {
+    position: absolute;
+    content: '';
+    width: 3px;
+    height: 18px;
+    background-color: $border;
+    top: 20px;    
+    left: 34px;
+  }
+  &:before {
+    position: absolute;
+    content: '';
+    background-color: $sofa;    
+    width: 17px;
+    height: 35px;
+    border-radius: 5px;
+    top: 20px;
+    left: 18px;
+  }
+}
+
+.sofaArmrest:nth-child(2) {
+  left: 190px;
+  &:before {
+    left: 0px;
+  }  
+  &:after {
+    left: -3px;
+  }
+}
+
+.sofaLeg {
+  width: 18px;
+  height: 18px;
+  @include border(3px);
+  background-color: rgb(31, 106, 129); 
+  top: 117px;
+  left: 10px;
+  
+}
+
+.sofaRightLeg {
+  left: 165px;
+}
+
+.picture {
+  width: 80px;
+  height: 50px;
+  border: 5px solid #fff;
+  outline: 3px solid $border;
+  top: -60px;
+  left: 110px;
+  border-radius: 2px;
+  background-color: #f5f6f7;
+  &:before {
+    // position: absolute;
+    // content: '';
+    // @include border(3px);
+    // width: 8px;
+    // height: 8px;
+    // border-radius: 50%;
+    // top: -16px;
+    // left: 33px;
+    // Z-index: -20;
+  }
+  &:after {
+    position: absolute;
+    content: '';
+    border-right: 80px solid #e6e7e7;
+    border-top: 50px solid transparent;
+  }
+}
+
+.lamp {
+  height: 50px;
+	width: 50px;
+  @include border(3px);
+  border-top-width: 5px; 
+  transform: perspective(100px) rotateX(40deg);
+  top: -20px;
+  left: 300px;
+  background-color: #fff;
+  box-shadow: inset -10px 0 0 0 #dededf, inset -20px 0 0 0 #e6e7e7, inset -30px 0 0 0 #f5f6f7; 
+ }
+
+.lampLeg {
+  height: 12px;
+	width: 50px;
+  @include border(3px);
+  background-color: #616a9a;
+  top: 173px;
+  left: 300px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: inset -10px 0 0 0 #535e80, inset -20px 0 0 0 #5b648d;
+  &:before {
+    position: absolute;
+    content: '';
+    width: 4px;
+    height: 140px;
+    background-color: $border;
+    top: -143px;
+    left: 23px;
+  }
+  &:after {
+    position: absolute;
+    content: '';
+    background-color: $border;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: -192px;
+    left: 20px;
+    z-index: -10;
+  }
+}
+
+.pot {
+  width: 55px;
+  height: 5px;
+  background-color: #fff;
+  @include border(3px);
+  border-radius: 5px;
+  top: 140px;
+  left: -60px;
+  &:before, &:after {
+    position: absolute;
+    content: '';
+    width: 3px;
+    height: 45px;
+    background-color: $border;
+    top: 5px;    
+  }
+  &:before {
+    transform: rotate(-10deg);
+    left: 5px;
+  }
+  &:after {
+    transform: rotate(10deg);
+    left: 47px;
+  }
+}
+
+.cactus {
+  background-color: $cactus;
+  width: 8px;
+  height: 55px;
+  top: 95px;
+  left: -33px;
+  border-radius: 10px;
+  z-index: -10;
+  &:before, &:after {
+    position: absolute;
+    content: '';
+  }
+  &:before {
+    width: 10px;
+    height: 15px;
+    border-left: 8px solid $cactus;
+    border-bottom: 8px solid $cactus;
+    border-radius: 5px;
+    top: 6px;
+    left: -15px;
+  }
+  &:after {
+    width: 10px;
+    height: 20px;
+    border-right: 8px solid $cactus;
+    border-bottom: 8px solid $cactus;
+    border-radius: 5px;
+    top: 10px;
+    left: 5px;
+  }
+}
+
+.bricks1 {
+  background-color: #d6d6d6;
+  width: 50px;
+  height: 3px;
+  border-radius: 3px;
+  top: -20px;
+  left: 40px;
+  box-shadow: 0 15px 0 0 #d6d6d6;
+  &:before {
+    position: absolute;
+    content: '';
+    background-color: #d6d6d6;
+    width: 3px;
+    height: 15px;
+  }
+  &:before {
+    top: -12px;
+    left: 25px;
+    box-shadow: 9px 12px 0 0 #d6d6d6, -10px 27px 0 0 #d6d6d6;
+  }
+}
+
+.bricks2 {
+  background-color: #d6d6d6;
+  width: 50px;
+  height: 3px;
+  border-radius: 3px;
+  top: 25px;
+  left: 255px;
+  box-shadow: 0 15px 0 0 #d6d6d6;
+  transform: rotate(180deg);
+  z-index: -10;
+  &:before {
+    position: absolute;
+    content: '';
+    background-color: #d6d6d6;
+    width: 3px;
+    height: 15px;
+  }
+  &:before {
+    top: -12px;
+    left: 25px;
+    box-shadow: 9px 12px 0 0 #d6d6d6, -10px 27px 0 0 #d6d6d6;
+  }
+}
+
+.sofaGlare {
+  background-color: rgb(34, 146, 180);
+  width: 170px;
+  height: 65px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 19px;
+  &:before, &:after {
+    position: absolute;
+    content: '';
+    background-color: rgb(38, 168, 207);
+  } 
+  &:before {
+    width: 100px;
+    height: 55px;
+    border-bottom-right-radius: 30px;
+    border-top-left-radius: 19px;
+  }
+  &:after {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 3;
+    top: 42px;
+    left: -22px;
+    box-shadow: 225px 0 0 0 rgb(33, 152, 189);
+  }
+}
+

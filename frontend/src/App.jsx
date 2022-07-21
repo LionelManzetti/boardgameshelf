@@ -11,7 +11,7 @@ import LogIn from "./components/connexion/LogIn";
 import Shelf from "./pages/Shelf";
 import GameNight from "./pages/GameNight";
 import Profile from "./pages/Profile";
-import Wishlist from "./pages/Wishlist";
+import Help from "./pages/Help";
 import ShareList from "./pages/ShareList";
 
 import "./App.css";
@@ -38,7 +38,7 @@ function App() {
             <Route path="shelf" element={<Shelf />} />
             <Route path="gamenight" element={<GameNight />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="wishlist" element={<Wishlist />} />
+            <Route path="help" element={<Help />} />
           </Route>
           <Route path="/share/:type/:id" element={<ShareList />} />
         </Routes>
