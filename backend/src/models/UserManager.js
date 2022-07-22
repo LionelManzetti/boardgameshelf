@@ -12,7 +12,7 @@ class UserManager extends AbstractManager {
   findOne(email) {
     return this.connection
       .query(
-        `SELECT * FROM ${this.table} INNER JOIN avatar ON avatar.avatar_id = ${this.table}.avatar_id WHERE id = ?`,
+        `SELECT * FROM ${this.table} INNER JOIN avatar ON avatar.avatar_id = ${this.table}.avatar_id WHERE email = ?`,
         [email]
       )
       .then((user) => user[0][0]);
