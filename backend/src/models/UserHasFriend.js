@@ -5,7 +5,7 @@ class UserHasFriend extends AbstractManager {
 
   findMany(id) {
     return this.connection.query(
-      `SELECT * FROM  ${this.table} AS uhf INNER JOIN user AS u ON u.id = uhf.friend_id where user_id = ?`,
+      `SELECT * FROM  ${this.table} AS uhf INNER JOIN user AS u ON u.id = uhf.friend_id INNER JOIN avatar AS a ON a.avatar_id = u.avatar_id where user_id = ?`,
       [id]
     );
   }

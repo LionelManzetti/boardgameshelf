@@ -97,11 +97,11 @@ $k-right-ear: (
 );
 
 $tail-interval: calc((11 - 7.5) / $tail-wags);
-
+@use "sass:math";
 @mixin effect($name, $kf) {
   @keyframes #{$name} {
     @each $interval, $transform in $kf {
-      #{percentage($interval/$total-kf)} {
+      #{math.percentage(math.div($interval,$total-kf))} {
         transform: $transform;
       }
     }

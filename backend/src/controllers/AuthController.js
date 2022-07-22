@@ -71,6 +71,7 @@ class AuthController {
           name: userExist.name,
           email: userExist.email,
           id: userExist.id,
+          picture: userExist.picture,
         });
     } catch (err) {
       console.error(err);

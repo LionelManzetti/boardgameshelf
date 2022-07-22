@@ -31,7 +31,7 @@ class UserController {
 
   static read = (req, res) => {
     models.user
-      .find(req.params.id)
+      .findOne(req.params.id)
       .then(([rows]) => {
         if (rows[0] == null) {
           res.sendStatus(404);
@@ -46,19 +46,25 @@ class UserController {
   };
 
   static edit = (req, res) => {
-    const item = req.body;
-
-    // TODO validations (length, format...)
-
-    item.id = parseInt(req.params.id, 10);
-
     models.user
-      .update(item)
+      .update(req.body, req.params.id)
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);
         } else {
-          res.sendStatus(204);
+          models.user
+            .findOne(req.params.id)
+            .then((results) => {
+              if (results == null) {
+                res.sendStatus(404);
+              } else {
+                res.send(results);
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+              res.sendStatus(500);
+            });
         }
       })
       .catch((err) => {
