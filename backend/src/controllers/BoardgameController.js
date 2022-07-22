@@ -1,8 +1,8 @@
 const models = require("../models");
 
-class ItemController {
+class BoardgameController {
   static browse = (req, res) => {
-    models.item
+    models.boardgame
       .findAll()
       .then(([rows]) => {
         res.send(rows);
@@ -14,7 +14,7 @@ class ItemController {
   };
 
   static read = (req, res) => {
-    models.item
+    models.boardgame
       .find(req.params.id)
       .then(([rows]) => {
         if (rows[0] == null) {
@@ -36,7 +36,7 @@ class ItemController {
 
     item.id = parseInt(req.params.id, 10);
 
-    models.item
+    models.boardgame
       .update(item)
       .then(([result]) => {
         if (result.affectedRows === 0) {
@@ -53,10 +53,7 @@ class ItemController {
 
   static add = (req, res) => {
     const item = req.body;
-
-    // TODO validations (length, format...)
-
-    models.item
+    models.boardgame
       .insert(item)
       .then(([result]) => {
         res.status(201).send({ ...item, id: result.insertId });
@@ -68,7 +65,7 @@ class ItemController {
   };
 
   static delete = (req, res) => {
-    models.item
+    models.boardgame
       .delete(req.params.id)
       .then(() => {
         res.sendStatus(204);
@@ -80,4 +77,4 @@ class ItemController {
   };
 }
 
-module.exports = ItemController;
+module.exports = BoardgameController;
