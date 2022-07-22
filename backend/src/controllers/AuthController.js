@@ -45,7 +45,6 @@ class AuthController {
           .status(400)
           .send({ error: "Invalid Credentials, please retry" });
       }
-
       const validPass = await verifyPassword(
         req.body.password,
         userExist.hashedpassword
