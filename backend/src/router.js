@@ -8,6 +8,7 @@ const {
   AuthController,
   UserHasBoardgameController,
   UserHasFriendsController,
+  AvatarController,
 } = require("./controllers");
 
 const router = express.Router();
@@ -40,5 +41,7 @@ router.delete(
 router.get("/friends/:userId", UserHasFriendsController.browse);
 router.post("/friends/:userId/:friendId", UserHasFriendsController.add);
 router.delete("/friends/:userId/:friendId", UserHasFriendsController.delete);
+
+router.get("/avatars/", AvatarController.browse);
 
 module.exports = router;

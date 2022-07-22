@@ -12,7 +12,6 @@ import Shelf from "./pages/Shelf";
 import GameNight from "./pages/GameNight";
 import Profile from "./pages/Profile";
 import Help from "./pages/Help";
-import ShareList from "./pages/ShareList";
 
 import "./App.css";
 
@@ -40,7 +39,6 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="help" element={<Help />} />
           </Route>
-          <Route path="/share/:type/:id" element={<ShareList />} />
         </Routes>
       </AnimatePresence>
     </div>

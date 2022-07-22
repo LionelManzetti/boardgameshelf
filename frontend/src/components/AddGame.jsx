@@ -48,7 +48,12 @@ function AddGame({ setModal, displayedGames }) {
               boardgameSelected.boardgame_id
             }`
           )
-          .then(() => handleUser(user))
+          .then(() => {
+            handleUser(user);
+            setTimeout(() => {
+              setModal(false);
+            }, 800);
+          })
           .catch((err) => console.warn(err));
       });
     }

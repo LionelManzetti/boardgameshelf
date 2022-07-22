@@ -10,10 +10,10 @@ const getRandomInt = (max) => {
 };
 
 const colorRandom = [
-  "bg-orange-800 border-r-8 border-t-4 border-orange-900 text-orange-200 ",
-  "bg-cyan-800 border-r-8 border-t-4 border-cyan-900 text-cyan-200 ",
-  "bg-green-800 border-r-8 border-t-4 border-green-900 text-green-200 ",
-  "bg-yellow-600 border-r-8 border-t-4 border-yellow-800 text-yellow-200 ",
+  "bg-orange-800 border-r-8 border-t-4 border-r-orange-900 border-t-orange-700 text-orange-200 ",
+  "bg-cyan-800 border-r-8 border-t-4 border-r-cyan-900 border-t-cyan-700 text-cyan-200 ",
+  "bg-green-800 border-r-8 border-t-4 border-r-green-900 border-t-green-700 text-green-200 ",
+  "bg-yellow-600 border-r-8 border-t-4 border-r-yellow-900 border-t-yellow-800 text-yellow-200 ",
 ];
 const marginRandom = ["mx-1", "mx-2", "mx-0", "mx-3"];
 
@@ -94,14 +94,14 @@ function Shelf() {
             </button>
           </div>
         </div>
-        <div className="bg-yellow-700 m-5 h-5/6 big-shadow-inner flex flex-col justify-end flex-wrap p-4 pb-1  rounded-md">
+        <div className="bg-yellow-700 m-5 h-5/6 big-shadow-inner flex flex-col justify-end flex-wrap p-4 pb-1 rounded-md mb-2">
           {displayedGames &&
             displayedGames.map((game, ind) => (
               <button
                 type="button"
                 className={`${colorRandom[getRandomInt(4)]} ${
                   marginRandom[getRandomInt(4)]
-                } w-5/12 lg:w-1/12 text-base text-left p-1 pl-2 mb-1 truncate shadow-md hover:rotate-2 ${
+                } w-5/12 lg:w-1/12 text-base text-left p-1 pl-2 mb-0.5 truncate rounded-r-lg rounded-tr-sm rounded-tl-md shadow-md hover:rotate-2 ${
                   ind > 20 ? "hidden lg:flex" : ""
                 }`}
                 key={game.id}

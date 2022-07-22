@@ -17,31 +17,60 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `boardgameshelf` DEFAULT CHARACTER SET utf8 ;
 USE `boardgameshelf` ;
 
--- -----------------------------------------------------
--- Table `boardgameshelf`.`user`
--- -----------------------------------------------------
 DROP TABLE IF EXISTS `boardgameshelf`.`user` ;
 DROP TABLE IF EXISTS `boardgameshelf`.`boardgame` ;
 DROP TABLE IF EXISTS `boardgameshelf`.`user_has_boardgame` ;
 DROP TABLE IF EXISTS `boardgameshelf`.`user_has_friend` ;
+DROP TABLE IF EXISTS `boardgameshelf`.`avatar` ;
 
+-- -----------------------------------------------------
+-- Table `boardgameshelf`.`avatar`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `boardgameshelf`.`avatar` (
+  `avatar_id` INT NOT NULL,
+  `picture` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`avatar_id`));
+
+INSERT INTO `avatar` (`avatar_id`, `picture`) VALUES
+(1, 'https://robohash.org/504d8d49f70c07629ae43f4ac9ed3137?set=set4&bgset=&size=400x400'),
+(2, 'https://robohash.org/617df3f891d2fab3206155adcbcad9f5?set=set4&bgset=&size=400x400'),
+(3, 'https://robohash.org/1afcbe75f9810706b95aa00cf56f9d0f?set=set4&bgset=&size=400x400'),
+(4, 'https://robohash.org/e600fdfd36e9884f1de058405866b382?set=set4&bgset=&size=400x400'),
+(5, 'https://robohash.org/983929b2f1a95d1952fee758c393ac0f?set=set4&bgset=&size=400x400'),
+(6, 'https://robohash.org/891ae7abf48cde75afb2d61b836d4cdc?set=set4&bgset=&size=400x400'),
+(7, 'https://robohash.org/63adcf3e7b64bd7d0d9e4bd860c748ad?set=set4&bgset=&size=400x400'),
+(8, 'https://robohash.org/4470be902c4d4c8ef4bbc4806749ebeb?set=set4&bgset=&size=400x400'),
+(9, 'https://robohash.org/072dbf92ca7dd46205718101cab7eb8a?set=set4&bgset=&size=400x400'),
+(10, 'https://robohash.org/4c63a1334e8ec2d139d4237dc6528199?set=set4&bgset=&size=400x400');
+
+-- -----------------------------------------------------
+-- Table `boardgameshelf`.`user`
+-- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `boardgameshelf`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `hashedpassword` VARCHAR(255) NOT NULL,
+  `avatar_id` INT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  INDEX `fk_user_avatar1_idx` (`avatar_id` ASC) VISIBLE,
+  CONSTRAINT `fk_user_avatar1`
+    FOREIGN KEY (`avatar_id`)
+    REFERENCES `boardgameshelf`.`avatar` (`avatar_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
-INSERT INTO `user` (`id`, `name`, `email`, `hashedpassword`) VALUES
-(1, 'Jean Jean', 'jean.jean@jeanmail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
-(2, 'Benoyt', 'benoyt.vendanges@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
-(3, 'Fabienne', 'clarisse.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
-(4, 'Paul Tergeist', 'paul.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
-(5, 'Grimoare', 'terry.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
-(6, 'Clemoufle', 'clem.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo'),
-(7, 'Jujuck', 'Jujuck.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo');
+INSERT INTO `user` (`id`, `name`, `email`, `hashedpassword`, `avatar_id`) VALUES
+(1, 'Jean Jean', 'jean.jean@jeanmail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo', 1),
+(2, 'Benoyt', 'benoyt.vendanges@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo', 2),
+(3, 'Fabienne', 'clarisse.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo', 3),
+(4, 'Paul Tergeist', 'paul.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo', 4),
+(5, 'Grimoare', 'terry.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo', 5),
+(6, 'Clemoufle', 'clem.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo', 6),
+(7, 'Jujuck', 'Jujuck.random@caramail.com', '$argon2id$v=19$m=65536,t=5,p=1$wCiUeYdaDWDCX7ZQ2qKFng$pYxPOsrdfo9p2XJO6st7h60EIL++m2j+o/AS58W8dMo', 7);
 -- -----------------------------------------------------
 -- Table `boardgameshelf`.`boardgame`
 -- -----------------------------------------------------

@@ -17,7 +17,7 @@ function Help() {
         <h2 className="text-2xl m-2 font-semibold text-red-800">
           Welcome {user.name} ! 🎈
         </h2>
-        <p className="text-red-800">
+        <p className="text-red-800 text-sm">
           Before we begin, here's a little guideline on how to use this app.
         </p>
 
