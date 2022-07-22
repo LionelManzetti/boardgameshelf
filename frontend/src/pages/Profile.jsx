@@ -49,7 +49,6 @@ function Profile() {
       <ToastContainer />
       <div className="flex flex-col items-center justify-around m-6 text-teal-800">
         <h2 className="text-2xl m-2 mb-0 font-semibold">
-          {" "}
           Hi {user.name} ! &#128075;
         </h2>
         <p>Here, you can manage your friends list.</p>
@@ -63,7 +62,9 @@ function Profile() {
         {friends &&
           friends.map((friend) => (
             <div className="flex justify-between w-2/3">
-              <p>{friend.name}</p>
+              <p className="border bg-gray-300 px-2 rounded-full">
+                {friend.name}
+              </p>
               <button
                 type="button"
                 onClick={() => notifyError("Friendship is forever")}
@@ -93,7 +94,9 @@ function Profile() {
             )
             .map((friend) => (
               <div className="flex justify-between w-2/3 bg-gray-200">
-                <p>{friend.name}</p>
+                <p className="border bg-gray-300 px-2 rounded-full">
+                  {friend.name}
+                </p>
                 <button
                   type="button"
                   onClick={() => handleAdd(friend.id)}

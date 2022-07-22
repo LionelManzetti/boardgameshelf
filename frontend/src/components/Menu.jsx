@@ -24,11 +24,7 @@ function Menu() {
               }
         }
       >
-        <img
-          src={shelf}
-          alt="shelf"
-          className="w-10 h-10 max-w-10 rounded-xl"
-        />
+        <img src={shelf} alt="shelf" className="w-10 h-10 rounded-xl" />
       </NavLink>
 
       <NavLink

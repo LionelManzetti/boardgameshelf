@@ -2,7 +2,12 @@
   border: $b solid $border;
 }
 
+@mixin borderl($b) {
+  border: $b solid $borderl;
+}
+
 $border: rgb(21 94 117);
+$borderl: rgb(65, 65, 65);
 $sofa: rgb(28, 117, 145);
 $cactus: #71C26D;
 
@@ -100,49 +105,47 @@ $cactus: #71C26D;
   width: 80px;
   height: 50px;
   border: 5px solid #fff;
-  outline: 3px solid $border;
-  top: -60px;
-  left: 110px;
+  outline: 3px solid $borderl;
   border-radius: 2px;
   background-color: #f5f6f7;
-  &:before {
-    // position: absolute;
-    // content: '';
-    // @include border(3px);
-    // width: 8px;
-    // height: 8px;
-    // border-radius: 50%;
-    // top: -16px;
-    // left: 33px;
-    // Z-index: -20;
-  }
-  &:after {
-    position: absolute;
-    content: '';
-    border-right: 80px solid #e6e7e7;
-    border-top: 50px solid transparent;
-  }
+  // &:before {
+  //   // position: absolute;
+  //   // content: '';
+  //   // @include border(3px);
+  //   // width: 8px;
+  //   // height: 8px;
+  //   // border-radius: 50%;
+  //   // top: -16px;
+  //   // left: 33px;
+  //   // Z-index: -20;
+  // }
+  // &:after {
+  //   position: absolute;
+  //   content: '';
+  //   border-right: 80px solid #e6e7e7;
+  //   border-top: 50px solid transparent;
+  // }
 }
 
 .lamp {
   height: 50px;
 	width: 50px;
-  @include border(3px);
+  @include borderl(3px);
   border-top-width: 5px; 
   transform: perspective(100px) rotateX(40deg);
   top: -20px;
-  left: 300px;
+  left: 280px;
   background-color: #fff;
   box-shadow: inset -10px 0 0 0 #dededf, inset -20px 0 0 0 #e6e7e7, inset -30px 0 0 0 #f5f6f7; 
  }
 
 .lampLeg {
   height: 12px;
-	width: 50px;
-  @include border(3px);
+	width: 54px;
+  @include borderl(3px);
   background-color: #616a9a;
-  top: 173px;
-  left: 300px;
+  top: 172px;
+  left: 278px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   box-shadow: inset -10px 0 0 0 #535e80, inset -20px 0 0 0 #5b648d;
@@ -150,15 +153,15 @@ $cactus: #71C26D;
     position: absolute;
     content: '';
     width: 4px;
-    height: 140px;
-    background-color: $border;
-    top: -143px;
+    height: 144px;
+    background-color: $borderl;
+    top: -147px;
     left: 23px;
   }
   &:after {
     position: absolute;
     content: '';
-    background-color: $border;
+    background-color: $borderl;
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -169,19 +172,19 @@ $cactus: #71C26D;
 }
 
 .pot {
-  width: 55px;
-  height: 5px;
-  background-color: #fff;
-  @include border(3px);
+  width: 61px;
+  height: 11px;
+  background-color: rgb(233, 233, 233);
+  @include borderl(3px);
   border-radius: 5px;
-  top: 140px;
-  left: -60px;
+  top: 92px;
+  left: 60px;
   &:before, &:after {
     position: absolute;
     content: '';
     width: 3px;
     height: 45px;
-    background-color: $border;
+    background-color: $borderl;
     top: 5px;    
   }
   &:before {
@@ -198,8 +201,8 @@ $cactus: #71C26D;
   background-color: $cactus;
   width: 8px;
   height: 55px;
-  top: 95px;
-  left: -33px;
+  top: 42px;
+  left: 87px;
   border-radius: 10px;
   z-index: -10;
   &:before, &:after {
@@ -207,8 +210,8 @@ $cactus: #71C26D;
     content: '';
   }
   &:before {
-    width: 10px;
-    height: 15px;
+    width: 18px;
+    height: 20px;
     border-left: 8px solid $cactus;
     border-bottom: 8px solid $cactus;
     border-radius: 5px;
@@ -216,8 +219,8 @@ $cactus: #71C26D;
     left: -15px;
   }
   &:after {
-    width: 10px;
-    height: 20px;
+    width: 18px;
+    height: 30px;
     border-right: 8px solid $cactus;
     border-bottom: 8px solid $cactus;
     border-radius: 5px;
@@ -233,6 +236,7 @@ $cactus: #71C26D;
   border-radius: 3px;
   top: -20px;
   left: 40px;
+  z-index: -10;
   box-shadow: 0 15px 0 0 #d6d6d6;
   &:before {
     position: absolute;

@@ -44,7 +44,7 @@ function Shelf() {
 
   return (
     <>
-      <div className="bg-yellow-800 w-4/5 h-5/6 shadow-lg">
+      <div className="bg-yellow-800 w-4/5 h-5/6 shadow-xl rounded-md">
         <AnimatePresence exitBeforeEnter initial={false}>
           {addNewModal && (
             <motion.div
@@ -94,7 +94,7 @@ function Shelf() {
             </button>
           </div>
         </div>
-        <div className="bg-yellow-700 m-5 h-5/6 big-shadow-inner flex flex-col justify-end flex-wrap p-4 pb-1">
+        <div className="bg-yellow-700 m-5 h-5/6 big-shadow-inner flex flex-col justify-end flex-wrap p-4 pb-1  rounded-md">
           {displayedGames &&
             displayedGames.map((game, ind) => (
               <button
