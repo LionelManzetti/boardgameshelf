@@ -1,6 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+import { ToastContainer } from "react-toastify";
+import { notifyError, notifySuccess } from "../services/toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ExportContextUser from "../contexts/UserContext";
 import Plant from "../components/css-objects/Plant";
 
@@ -47,6 +51,21 @@ function GameNight() {
     "Hidden",
     "Fun",
   ];
+
+  const sendEmail = () => {
+    const form = { to_name: user.name, message: "Ceci est un test" };
+
+    emailjs
+      .send("service_nehv9sq", "template_83f9oom", form, "l9llSH7NuCVp7XAp1")
+      .then(
+        () => {
+          notifySuccess("Program sent by mail !");
+        },
+        () => {
+          notifyError("Oups, didn't word !");
+        }
+      );
+  };
 
   useEffect(() => {
     axios
@@ -160,6 +179,7 @@ function GameNight() {
   return (
     <div>
       <div className="flex flex-col items-center justify-around text-green-800 m-5">
+        <ToastContainer />
         <h2 className="text-2xl m-2 font-semibold mb-5">
           All right {user.name} ! 📝
         </h2>
@@ -424,7 +444,7 @@ function GameNight() {
                 <button
                   className="mt-4 h-8 w-8 bg-green-800 rounded-full shadow-md pb-1"
                   type="button"
-                  onClick={() => setSlide("players")}
+                  onClick={() => sendEmail()}
                 >
                   ✉️
                 </button>
